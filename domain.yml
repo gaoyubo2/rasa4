@@ -1,0 +1,108 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- inquire_neo4j:
+    use_entities: true
+- request_gcode:
+    use_entities: true
+- select_sub_process:
+    use_entities: true
+- request_outer_circle_processing:
+    use_entities: true
+entities:
+- L
+- Hr
+- F
+- deltaT
+- process_type
+slots:
+  process_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  F:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+    max_value: 1.0
+    min_value: 0.0
+  Hr:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+    max_value: 1.0
+    min_value: 0.0
+  deltaT:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+    max_value: 1.0
+    min_value: 0.0
+  L:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+    max_value: 1.0
+    min_value: 0.0
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_F:
+  - text: 请输入 F 值 (例如1000.0)：
+  utter_ask_Hr:
+  - text: 请输入 Hr 值 (例如100.0)：
+  utter_ask_deltaT:
+  - text: 请输入 deltaT 值 (例如5.0)：
+  utter_ask_L:
+  - text: 请输入 L 值 (例如20.0)：
+actions:
+- action_query_neo4j
+- action_generate_gcode
+- action_request_outer_circle_processing
+- action_confirm_processing
+forms:
+  gcode_form:
+    required_slots:
+      F:
+      - type: from_text
+      Hr:
+      - type: from_text
+      L:
+      - type: from_text
+      deltaT:
+      - type: from_text
+e2e_actions: []

@@ -1,0 +1,71 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+
+- intent: affirm
+  examples: |
+    - yes
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+
+- intent: inquire_neo4j
+  examples: |
+    - 从 Neo4j 查询关于 CNC 的数据
+    - 给我所有与加工过程相关的记录
+    - 查找与 G-code 相关的信息
+    - 有没有关于 CNC 的数据？
+    - 查找所有关于 G71 的条目
+
+- intent: request_gcode
+  examples: |
+    - 我想生成 G 代码
+    - 帮我生成一个 G 代码
+    - 生成 G 代码
+    - 创建 G 代码
+    - 生成 G 代码，参数 F 为 [1000.0](F)，Hr 为 [100.0](Hr)，deltaT 为 [5.0](deltaT)，L 为 [20.0](L)
+    - 我需要生成 G 代码，参数 F [1200](F), Hr [80](Hr), deltaT [6](deltaT), L [25](L)
+    - 请生成 G 代码，F 是 [900](F), Hr 是 [110](Hr), deltaT [7](deltaT), L 是 [30](L)
+
+- intent: request_outer_circle_processing
+  examples: |
+    - 我想加工一个[外圆工艺](process_type)
+    - 请帮我设计一个[外圆](process_type)的加工方案
+    - 我需要[外圆](process_type)的加工
+    - 能帮我做一个[外圆](process_type)吗？
+    - 我想要[外圆](process_type)的加工工艺
+    - [外圆工艺](process_type)的加工步骤是什么？
+
+- intent: select_sub_process
+  examples: |
+    - 我想加工外圆弧子工艺
+    - 我需要外圆弧的加工
