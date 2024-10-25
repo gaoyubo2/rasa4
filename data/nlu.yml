@@ -56,16 +56,17 @@ nlu:
     - 我需要生成 G 代码，参数 F [1200](F), Hr [80](Hr), deltaT [6](deltaT), L [25](L)
     - 请生成 G 代码，F 是 [900](F), Hr 是 [110](Hr), deltaT [7](deltaT), L 是 [30](L)
 
-- intent: request_outer_circle_processing
+- intent: request_processing
   examples: |
     - 我想加工一个[外圆工艺](process_type)
-    - 请帮我设计一个[外圆](process_type)的加工方案
-    - 我需要[外圆](process_type)的加工
-    - 能帮我做一个[外圆](process_type)吗？
-    - 我想要[外圆](process_type)的加工工艺
+    - 请帮我设计一个[外圆工艺](process_type)的加工方案
+    - 我需要[外圆工艺](process_type)的加工
+    - 能帮我做一个[外圆工艺](process_type)吗？
+    - 我想要[外圆工艺](process_type)的加工工艺
     - [外圆工艺](process_type)的加工步骤是什么？
 
-- intent: select_sub_process
+- intent: request_sub_processing
   examples: |
-    - 我想加工外圆弧子工艺
-    - 我需要外圆弧的加工
+    - 我想加工[外圆弧](sub_process_type)子工艺
+    - 我需要[外圆弧](sub_process_type)子工艺的G代码
+    - [外圆弧](sub_process_type)子工艺的G代码是什么？

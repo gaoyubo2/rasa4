@@ -43,8 +43,10 @@ stories:
 
 - story: request processing
   steps:
-    - intent: request_outer_circle_processing
-    - action: action_request_outer_circle_processing
-    - slot_was_set:
-      - process_type: null
-    - action: action_confirm_processing
+    - intent: request_processing
+    - action: action_request_processing
+
+- story: request sub processing
+  steps:
+    - intent: request_sub_processing
+    - action: action_request_sub_processing

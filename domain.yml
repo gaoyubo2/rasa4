@@ -23,9 +23,9 @@ intents:
     use_entities: true
 - request_gcode:
     use_entities: true
-- select_sub_process:
+- request_sub_processing:
     use_entities: true
-- request_outer_circle_processing:
+- request_processing:
     use_entities: true
 entities:
 - L
@@ -33,8 +33,14 @@ entities:
 - F
 - deltaT
 - process_type
+- sub_process_type
 slots:
   process_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  sub_process_type:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -44,28 +50,28 @@ slots:
     initial_value: null
     auto_fill: false
     influence_conversation: true
-    max_value: 1.0
+    max_value: 99999.9
     min_value: 0.0
   Hr:
     type: rasa.shared.core.slots.FloatSlot
     initial_value: null
     auto_fill: false
     influence_conversation: true
-    max_value: 1.0
+    max_value: 99999.9
     min_value: 0.0
   deltaT:
     type: rasa.shared.core.slots.FloatSlot
     initial_value: null
     auto_fill: false
     influence_conversation: true
-    max_value: 1.0
+    max_value: 99999.9
     min_value: 0.0
   L:
     type: rasa.shared.core.slots.FloatSlot
     initial_value: null
     auto_fill: false
     influence_conversation: true
-    max_value: 1.0
+    max_value: 99999.9
     min_value: 0.0
 responses:
   utter_greet:
@@ -78,7 +84,7 @@ responses:
   utter_happy:
   - text: Great, carry on!
   utter_goodbye:
-  - text: Bye
+  - text: 代码已生成
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
   utter_ask_F:
@@ -89,11 +95,18 @@ responses:
   - text: 请输入 deltaT 值 (例如5.0)：
   utter_ask_L:
   - text: 请输入 L 值 (例如20.0)：
+  utter_ask_sub_process_type:
+  - buttons:
+    - payload: /request_gcode{"sub_process_type":"外圆"}
+      title: 外圆
+    - payload: /request_gcode{"sub_process_type":"外锥"}
+      title: 外锥
+    text: 请选择需要的子工艺类型：
 actions:
 - action_query_neo4j
 - action_generate_gcode
-- action_request_outer_circle_processing
-- action_confirm_processing
+- action_request_processing
+- action_request_sub_processing
 forms:
   gcode_form:
     required_slots:
@@ -104,5 +117,7 @@ forms:
       L:
       - type: from_text
       deltaT:
+      - type: from_text
+      sub_process_type:
       - type: from_text
 e2e_actions: []
