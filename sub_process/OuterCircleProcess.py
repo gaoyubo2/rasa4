@@ -2,7 +2,9 @@ import logging
 import math
 
 from component.common import P
+
 logger = logging.getLogger(__name__)
+
 
 class OuterCircle1Process(P):
     def __init__(self, sub_process_type: str, Cn: int, L: float, Tr: float, Cr: float, F: float, **kwargs):
@@ -19,23 +21,11 @@ class OuterCircle1Process(P):
         """
         super().__init__(sub_process_type, **kwargs)
         self.sub_process_type = sub_process_type
-        self.Cn = Cn  # 圆圈数量
-        self.L = L  # 长度
-        self.Tr = Tr  # 过渡半径
-        self.Cr = Cr  # 退回半径
-        self.F = F  # 进给速度
-        # 输出当前属性值
-        self.print_attributes()
-
-    def print_attributes(self):
-        """打印当前对象的属性值。"""
-        logger.info("外圆子工艺 属性初始化:")
-        logger.info(f"  工艺类型: {self.sub_process_type}")
-        logger.info(f"  Cn (int): 圆圈数量: {self.Cn}")
-        logger.info(f"  L (float): 长度: {self.L}")
-        logger.info(f"  Tr (float): 过渡半径: {self.Tr}")
-        logger.info(f"  Cr (float): 退回半径: {self.Cr}")
-        logger.info(f"  F (float): 进给速度: {self.F}")
+        self.Cn = int(Cn)  # 圆圈数量
+        self.L = float(L)  # 长度
+        self.Tr = float(Tr)  # 过渡半径
+        self.Cr = float(Cr)  # 退回半径
+        self.F = float(F)  # 进给速度
 
     def generate_gcode(self) -> str:
         """
@@ -100,13 +90,13 @@ class OuterCircle2Process(P):
         """
         super().__init__(sub_process_type, **kwargs)
         self.sub_process_type = sub_process_type
-        self.Cn = Cn
-        self.Tr = Tr
-        self.F = F
-        self.L = L
-        self.A = A
-        self.xDir = xDir
-        self.zDir = zDir
+        self.Cn = int(Cn)
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.L = float(L)
+        self.A = float(A)
+        self.xDir = int(xDir)
+        self.zDir = int(zDir)
         self.G71G73 = G71G73
 
     def generate_gcode(self) -> str:
