@@ -135,6 +135,26 @@ slots:
     initial_value: null
     auto_fill: false
     influence_conversation: true
+  Lr:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  CT:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  W:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  Tw:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
 responses:
   utter_greet:
   - text: Hey! How are you?
@@ -185,6 +205,14 @@ responses:
     text: 请输入 G2G3 值：1代表G2，0代表G3
   utter_ask_PHi1:
   - text: 请输入 PHi1 值：PHi1 为角度增量值。
+  utter_ask_Lr:
+  - text: 请输入 Lr 值：退刀量,表示每次退刀的距离
+  utter_ask_CT:
+  - text: 请输入 CT 值：最后一次进刀的退刀量
+  utter_ask_W:
+  - text: 请输入 W 值：加工宽度
+  utter_ask_Tw:
+  - text: 请输入 Tw 值：刀具宽度
   utter_ask_sub_process_type:
   - buttons:
     - payload: /request_gcode{"sub_process_type":"外圆"}

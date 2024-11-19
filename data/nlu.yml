@@ -50,6 +50,7 @@ nlu:
 - intent: request_processing
   examples: |
     - 我想加工一个[外圆工艺](process_type)
+    - 我想加工一个[端面工艺](process_type)
     - 请帮我设计一个[外圆工艺](process_type)的加工方案
     - 我需要[外圆工艺](process_type)的加工
     - 能帮我做一个[外圆工艺](process_type)吗？

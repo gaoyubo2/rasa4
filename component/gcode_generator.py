@@ -28,11 +28,11 @@ def get_process_instance(sub_process_type: str, **kwargs):
     elif sub_process_type == "外锥面":
         return OuterCircle3Process(sub_process_type, **kwargs)
 
-    elif sub_process_type == "END_FACE_ONE":
+    elif sub_process_type == "端面":
         return EndFace1Process(sub_process_type, **kwargs)
-    elif sub_process_type == "END_FACE_TWO":
+    elif sub_process_type == "切槽":
         return EndFace2Process(sub_process_type, **kwargs)
-    elif sub_process_type == "END_FACE_THREE":
+    elif sub_process_type == "内端面":
         return EndFace3Process(sub_process_type, **kwargs)
     elif sub_process_type == "INNER_HOLE_ONE":
         return InnerHole1Process(sub_process_type, **kwargs)

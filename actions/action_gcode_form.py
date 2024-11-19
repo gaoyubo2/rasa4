@@ -51,6 +51,10 @@ class GCodeForm(FormAction):
             "R": self.from_text(),
             "G2G3": self.from_text(),
             "PHi1": self.from_text(),
+            "Lr": self.from_text(),
+            "CT": self.from_text(),
+            "W": self.from_text(),
+            "Tw": self.from_text(),
             "sub_process_type": self.from_text(),  # 通过文本输入填充
         }
 

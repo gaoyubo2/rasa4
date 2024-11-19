@@ -12,6 +12,8 @@ class EndFace1Process(P):
 
     使用工艺:
     - 该类适用于端面加工（End Face Processing），常用于车床等数控机床的加工程序生成。
+
+    三种：断面、切槽、内端面
     """
 
     def __init__(self, sub_process_type: str, Cn: int, Lr: float, deltaT: float, CT: float, F: float, **kwargs):
@@ -29,15 +31,16 @@ class EndFace1Process(P):
 
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.Lr = Lr
-        self.deltaT = deltaT
-        self.CT = CT
-        self.F = F
+        self.sub_process_type = str(sub_process_type)  # 工艺类型字符串
+        self.Cn = int(Cn)  # 进刀次数为整数
+        self.Lr = float(Lr)  # 退刀量为浮动小数
+        self.deltaT = float(deltaT)  # 进刀量为浮动小数
+        self.CT = float(CT)  # 最后一次进刀的退刀量为浮动小数
+        self.F = float(F)  # 进给速度为浮动小数
 
     def generate_gcode(self) -> str:
         """
-        生成端面加工的 G 代码。
+        生成端面工艺加工的 G 代码。
         """
         gcode = []
         Cn = self.Cn
@@ -109,16 +112,18 @@ class EndFace2Process(P):
         - **kwargs (dict): 其他工艺相关参数（可选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.W = W
-        self.Tw = Tw
-        self.Cn = Cn
-        self.Lr = Lr
-        self.Tr = Tr
-        self.F = F
+        # 转换参数类型（确保类型正确）
+        self.sub_process_type = str(sub_process_type)  # 工艺类型字符串
+        self.W = float(W)  # 加工宽度，浮动小数类型
+        self.Tw = float(Tw)  # 刀具宽度，浮动小数类型
+        self.Cn = int(Cn)  # 进刀次数，整数类型
+        self.Lr = float(Lr)  # 退刀量，浮动小数类型
+        self.Tr = float(Tr)  # 每次进刀的深度，浮动小数类型
+        self.F = float(F)  # 进给速度，浮动小数类型
 
     def generate_gcode(self) -> str:
         """
-        生成端面加工的 G 代码。
+        生成切槽工艺的 G 代码。
 
         根据进刀次数、退刀量、进给速度等参数生成相应的 G 代码指令，并将其返回为字符串。
 
@@ -195,15 +200,17 @@ class EndFace3Process(P):
         - **kwargs (dict): 其他工艺相关参数（可选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.Lr = Lr
-        self.deltaT = deltaT
-        self.CT = CT
-        self.F = F
+        # 转换参数类型（确保类型正确）
+        self.sub_process_type = str(sub_process_type)  # 工艺类型字符串
+        self.Cn = int(Cn)  # 进刀次数，整数类型
+        self.Lr = float(Lr)  # 退刀量，浮动小数类型
+        self.deltaT = float(deltaT)  # 每次进刀的深度，浮动小数类型
+        self.CT = float(CT)  # 最后一次进刀的退刀量，浮动小数类型
+        self.F = float(F)  # 进给速度，浮动小数类型
 
     def generate_gcode(self) -> str:
         """
-        生成端面加工的 G 代码。
+        生成内端面工艺加工的 G 代码。
 
         根据进刀次数、退刀量、进给速度等参数生成相应的 G 代码指令，并将其返回为字符串。
 

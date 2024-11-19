@@ -25,3 +25,27 @@ sub_process_types:
       - G2G3
       - PHi1
       - L
+  端面:
+    required_params:
+      - Cn       # 进刀次数
+      - Lr       # 退刀量
+      - deltaT   # 进刀量
+      - CT       # 最后一次进刀的退刀量
+      - F        # 进给速度
+
+  切槽:
+    required_params:
+      - W        # 加工宽度
+      - Tw       # 刀具宽度
+      - Cn       # 进刀次数
+      - Lr       # 退刀量
+      - Tr       # 进刀深度
+      - F        # 进给速度
+
+  内端面:
+    required_params:
+      - Cn       # 进刀次数
+      - Lr       # 退刀量
+      - deltaT   # 进刀量
+      - CT       # 最后一次进刀的退刀量
+      - F        # 进给速度
