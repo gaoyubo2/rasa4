@@ -38,8 +38,9 @@ stories:
     - intent: request_gcode
     - action: gcode_form
     - active_loop: gcode_form
-    - action: action_generate_gcode
     - action: utter_goodbye
+
+
 
 - story: request processing
   steps:

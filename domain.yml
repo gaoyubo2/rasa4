@@ -27,6 +27,8 @@ intents:
     use_entities: true
 - request_processing:
     use_entities: true
+- clear_history:
+    use_entities: true
 entities:
 - L
 - Hr
@@ -34,6 +36,16 @@ entities:
 - deltaT
 - process_type
 - sub_process_type
+- Cn
+- Tr
+- Cr
+- A
+- xDir
+- zDir
+- G71G73
+- R
+- G2G3
+- PHi1
 slots:
   process_type:
     type: rasa.shared.core.slots.TextSlot
@@ -73,6 +85,56 @@ slots:
     influence_conversation: true
     max_value: 99999.9
     min_value: 0.0
+  Cn:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  Tr:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  Cr:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  A:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  xDir:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  zDir:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  G71G73:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  R:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  G2G3:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
+  PHi1:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
 responses:
   utter_greet:
   - text: Hey! How are you?
@@ -88,13 +150,41 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
   utter_ask_F:
-  - text: 请输入 F 值 (例如1000.0)：
+  - text: 请输入 F 值 (例如1000.0)：F 表示进给速度。
   utter_ask_Hr:
-  - text: 请输入 Hr 值 (例如100.0)：
-  utter_ask_deltaT:
-  - text: 请输入 deltaT 值 (例如5.0)：
+  - text: 请输入 Hr 值 (例如100.0)：Hr 为硬度值，用于加工硬材料时设定。
   utter_ask_L:
-  - text: 请输入 L 值 (例如20.0)：
+  - text: 请输入 L 值 (例如20.0)：L 为长度。
+  utter_ask_Cn:
+  - text: 请输入 Cn 值：Cn 为圆圈的数量。
+  utter_ask_Tr:
+  - text: 请输入 Tr 值：Tr 为过渡半径。
+  utter_ask_Cr:
+  - text: 请输入 Cr 值：Cr 为圆圈的半径。
+  utter_ask_A:
+  - text: 请输入 A 值：A 为某一角度或特定参数。
+  utter_ask_xDir:
+  - text: 请输入 xDir 值：xDir 为 X 轴方向。
+  utter_ask_zDir:
+  - text: 请输入 zDir 值：zDir 为 Z 轴方向。
+  utter_ask_G71G73:
+  - buttons:
+    - payload: G71
+      title: G71
+    - payload: G73
+      title: G73
+    text: 请输入 G71G73 值：选择 G71 或 G73。
+  utter_ask_R:
+  - text: 请输入 R 值：R 为半径值。
+  utter_ask_G2G3:
+  - buttons:
+    - payload: '1'
+      title: G2
+    - payload: '0'
+      title: G3
+    text: 请输入 G2G3 值：1代表G2，0代表G3
+  utter_ask_PHi1:
+  - text: 请输入 PHi1 值：PHi1 为角度增量值。
   utter_ask_sub_process_type:
   - buttons:
     - payload: /request_gcode{"sub_process_type":"外圆"}
@@ -102,22 +192,51 @@ responses:
     - payload: /request_gcode{"sub_process_type":"外锥"}
       title: 外锥
     text: 请选择需要的子工艺类型：
+  utter_ask_clear_history:
+  - buttons:
+    - payload: /clear_history
+      title: 是的，清除
+    - payload: /deny_clear_history
+      title: 不，不清除
+    text: 您确定要清除所有历史记录吗？
+  utter_ask_parameters:
+  - text: 请提供以下参数来生成 G 代码：{parameters}
 actions:
 - action_query_neo4j
 - action_generate_gcode
 - action_request_processing
 - action_request_sub_processing
+- action_clear_history
+- gcode_form
 forms:
   gcode_form:
     required_slots:
+      A:
+      - type: from_text
+      Cn:
+      - type: from_text
+      Cr:
+      - type: from_text
       F:
+      - type: from_text
+      G2G3:
+      - type: from_text
+      G71G73:
       - type: from_text
       Hr:
       - type: from_text
       L:
       - type: from_text
-      deltaT:
+      PHi1:
+      - type: from_text
+      R:
+      - type: from_text
+      Tr:
       - type: from_text
       sub_process_type:
+      - type: from_text
+      xDir:
+      - type: from_text
+      zDir:
       - type: from_text
 e2e_actions: []

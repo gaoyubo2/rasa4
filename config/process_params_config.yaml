@@ -1,0 +1,27 @@
+sub_process_types:
+  外圆:
+    required_params:
+      - Cn
+      - L
+      - Tr
+      - Cr
+      - F
+  外圆弧:
+    required_params:
+      - Cn
+      - L
+      - Tr
+      - A
+      - F
+      - xDir
+      - zDir
+      - G71G73
+  外锥面:
+    required_params:
+      - R
+      - Tr
+      - Cn
+      - F
+      - G2G3
+      - PHi1
+      - L

@@ -44,11 +44,20 @@ class ActionConfirmProcessing(Action):
         logger.info(f"为父工艺 '{process_type}' 查询到的子工艺: {sub_processes}")
 
         # 提供子工艺按钮供用户选择
-        buttons = [{"title": sub_process, "payload": f'/request_gcode{{"sub_process_type": "{sub_process}"}}'} for sub_process in sub_processes]
+        buttons = []
+        for sub_process in sub_processes:
+            # 使用字符串格式化生成 payload，确保 JSON 格式正确
+            buttons.append({
+                "title": sub_process,  # 显示子工艺名称
+                "payload": f'/request_gcode{{"sub_process_type": "{sub_process}"}}'  # payload格式
+            })
+
+        # 发送子工艺按钮
         dispatcher.utter_message(
             text=f"已选择父工艺 '{process_type}'，请选择相关的子工艺：",
             buttons=buttons
         )
+
         logger.info("已发送子工艺选择按钮。")
 
         return []

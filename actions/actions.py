@@ -25,7 +25,6 @@ from rasa.shared.exceptions import RasaException
 #
 #         return []
 from rasa_sdk import Action
-from .neo4j_connector import Neo4jConnector
 
 from neo4j import GraphDatabase
 

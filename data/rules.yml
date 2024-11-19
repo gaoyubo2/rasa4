@@ -11,3 +11,8 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: clear all
+  steps:
+  - intent: clear_history
+  - action: action_clear_history

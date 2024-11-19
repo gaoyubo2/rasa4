@@ -12,6 +12,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
+def make_button(title, payload):
+    return {'title': title, 'payload': payload}
+
+
 def to_pinyin(text: str) -> str:
     if not text:  # 检查是否为空或 None
         logger.warning("输入的文本为空，返回空字符串。")
@@ -51,7 +55,13 @@ class ActionRequestProcessing(Action):
             tracker: Tracker,
             domain: Dict[str, Any]) -> List[Dict[str, Any]]:
 
-        user_input_process = tracker.get_slot("process_type")  # 从插槽获取用户输入
+        # # 从插槽获取用户输入
+        # user_input_process = tracker.get_slot("process_type")
+
+        # 手动提取实体，不将其存入槽位
+        entities = tracker.latest_message['entities']
+        user_input_process = next((e['value'] for e in entities if e['entity'] == 'process_type'), None)
+
         logger.info(f"获取到用户输入的工艺类型: {user_input_process}")
 
         # 查询所有工艺类型
@@ -60,7 +70,8 @@ class ActionRequestProcessing(Action):
 
         # 如果用户输入为空，则提供所有工艺的按钮供选择
         if not user_input_process:
-            buttons = [{"title": process, "payload": f"/request_sub_processing{{process_type:'{process}'}}"} for process in
+            buttons = [{"title": process, "payload": f"/request_sub_processing{{process_type:'{process}'}}"} for process
+                       in
                        all_processes]
             dispatcher.utter_message(
                 text="请从以下列表中选择工艺类型：",
@@ -71,27 +82,40 @@ class ActionRequestProcessing(Action):
 
         # 用户输入不为null，查询相似度
         similarities = []  # 用于存储相似度信息
+        matching_processes = []  # 用于存储符合相似度要求的工艺及其相似度
+
         for process in all_processes:
             similarity = calculate_similarity(user_input_process, process)
             similarities.append((process, similarity))  # 存储工艺和对应的相似度
             logger.info(f"工艺: '{process}' 与用户输入的相似度: {similarity:.2f}")  # 打印每个工艺的相似度
 
             if similarity > 0.6:
-                logger.info(f"找到相似工艺: {process}")
-                # 提示用户重新输入，并提供所有工艺的按钮选择
-                buttons = [{"title": process, "payload": f"/request_sub_processing{{process_type:'{process}'}}"} for
-                           _ in
-                           process]
-                dispatcher.utter_message(
-                    text=f"您是想加工'{process}'类型吗：",
-                    buttons=buttons
-                )
-                # 更新插槽
-                return [SlotSet("process_type", process)]
+                matching_processes.append((process, similarity))  # 存储符合要求的工艺及相似度
+
+        # 检查是否有匹配的工艺，并一次性生成按钮
+        if matching_processes:
+            logger.info("进入匹配列表")
+            buttons = []
+            for process, similarity in matching_processes:
+                # 使用字符串格式化生成 payload，确保 JSON 格式正确
+                buttons.append(make_button(
+                    f"{process} (相似度: {similarity:.2f})",
+                    f"/request_sub_processing{{\"process_type\": \"{process}\"}}"
+                ))
+
+            # 使用新的方法发送按钮
+            dispatcher.utter_message(
+                text="根据知识图谱检索，您是想加工以下类型吗(相似度 > 0.6)：",
+                buttons=buttons
+            )
+
+            # 默认不更新插槽
+            return []
 
         # 没找到关系度高的
 
-        buttons = [{"title": process, "payload": f'/request_sub_processing{{"process_type":"{process}"}}'} for process in all_processes]
+        buttons = [{"title": process, "payload": f'/request_sub_processing{{"process_type":"{process}"}}'} for process
+                   in all_processes]
 
         dispatcher.utter_message(
             text=f"抱歉，暂不支持加工该工艺:'{user_input_process}'，请从以下列表中选择工艺类型：",
@@ -99,4 +123,3 @@ class ActionRequestProcessing(Action):
         )
         logger.warning(f"未找到与用户输入相似的工艺: '{user_input_process}'")
         return []
-
