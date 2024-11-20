@@ -34,15 +34,15 @@ def get_process_instance(sub_process_type: str, **kwargs):
         return EndFace2Process(sub_process_type, **kwargs)
     elif sub_process_type == "内端面":
         return EndFace3Process(sub_process_type, **kwargs)
-    elif sub_process_type == "INNER_HOLE_ONE":
+    elif sub_process_type == "中心孔":
         return InnerHole1Process(sub_process_type, **kwargs)
-    elif sub_process_type == "INNER_HOLE_TWO":
+    elif sub_process_type == "内锥面":
         return InnerHole2Process(sub_process_type, **kwargs)
-    elif sub_process_type == "INNER_HOLE_THREE":
+    elif sub_process_type == "内槽":
         return InnerHole3Process(sub_process_type, **kwargs)
-    elif sub_process_type == "INNER_HOLE_FOUR":
+    elif sub_process_type == "内弧":
         return InnerHole4Process(sub_process_type, **kwargs)
-    elif sub_process_type == "INNER_HOLE_FIVE":
+    elif sub_process_type == "内圆":
         return InnerHole5Process(sub_process_type, **kwargs)
     elif sub_process_type == "CONE_FACE_ONE":
         return ConeFace1Process(sub_process_type, **kwargs)

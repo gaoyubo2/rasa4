@@ -23,7 +23,7 @@ class InnerHole1Process(P):
 
     def __init__(self, sub_process_type: str, Cn: int, L: float, Tr: float, Cr: float, F: float, **kwargs):
         """
-        初始化内孔加工 G 代码生成器。
+        初始化中心孔加工 G 代码生成器。
 
         参数:
         - Cn (int): 进刀次数（必选）。
@@ -34,11 +34,11 @@ class InnerHole1Process(P):
         - **kwargs (dict): 其他工艺相关参数（可选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.L = L
-        self.Tr = Tr
-        self.Cr = Cr
-        self.F = F
+        self.Cn = int(Cn)
+        self.L = float(L)
+        self.Tr = float(Tr)
+        self.Cr = float(Cr)
+        self.F = float(F)
 
     def generate_gcode(self) -> str:
         """
@@ -100,22 +100,22 @@ class InnerHole2Process(P):
         - A (float): 锥度角度（必选）。
         - xDir (int): X 轴方向（必选）。
         - zDir (int): Z 轴方向（必选）。
-        - G71G73 (int): 加工模式（必选）。
+        - G71G73 (str): 加工模式（必选）。
         - **kwargs (dict): 其他工艺相关参数（可选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.L = L
-        self.Tr = Tr
-        self.F = F
-        self.A = A
-        self.xDir = xDir
-        self.zDir = zDir
+        self.Cn = int(Cn)
+        self.L = float(L)
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.A = float(A)
+        self.xDir = int(xDir)
+        self.zDir = int(zDir)
         self.G71G73 = G71G73
 
     def generate_gcode(self) -> str:
         """
-        生成内孔加工的 G 代码。
+        生成内锥面工艺加工的 G 代码。
 
         根据加工模式（G71 或 G73）以及进刀次数、进刀深度等参数生成相应的 G 代码。
 
@@ -126,7 +126,7 @@ class InnerHole2Process(P):
         tanA = math.tan(math.radians(self.A))  # 锥度角度转弧度后计算正切
         Cr = self.L * tanA
 
-        if self.G71G73 == 73:  # G73 加工模式
+        if self.G71G73 == 'G73':  # G73 加工模式
             for a in range(self.Cn):
                 if a == 0:
                     gcode.append("O200")
@@ -150,7 +150,7 @@ class InnerHole2Process(P):
                     gcode.append(f"G00 U[{self.Tr * (self.Cn - 1)} * #521 * -1] F{self.F};")
                     gcode.append("M30;")  # 结束
 
-        elif self.G71G73 == 71:  # G71 加工模式
+        elif self.G71G73 == 'G71':  # G71 加工模式
             gcode.append("O200;")
             gcode.append("G28")  # 复位
             gcode.append(f"G71 U{self.Tr} R{self.Tr / 2} F{self.F};")
@@ -185,16 +185,15 @@ class InnerHole3Process(P):
         - F (float): 进给速度（必选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.W = W
-        self.Tw = Tw
-        self.Cn = Cn
-        self.Lr = Lr
-        self.Tr = Tr
-        self.F = F
-
+        self.W = float(W)
+        self.Tw = float(Tw)
+        self.Cn = int(Cn)
+        self.Lr = float(Lr)
+        self.Tr = float(Tr)
+        self.F = float(F)
     def generate_gcode(self) -> str:
         """
-        生成内孔切槽的 G 代码。
+        生成内槽的 G 代码。
 
         根据切槽的开口宽度、刀具宽度、切槽次数等参数生成相应的 G 代码。
 
@@ -265,17 +264,17 @@ class InnerHole4Process(P):
         - L (float): Z轴的增量位置（必选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.R = R
-        self.Tr = Tr
-        self.Cn = Cn
-        self.F = F
-        self.G2G3 = G2G3
-        self.PHi1 = PHi1
-        self.L = L
+        self.R = float(R)
+        self.Tr = float(Tr)
+        self.Cn = int(Cn)
+        self.F = float(F)
+        self.G2G3 = int(G2G3)
+        self.PHi1 = float(PHi1)
+        self.L = float(L)
 
     def generate_gcode(self) -> str:
         """
-        生成内孔切割的 G 代码。
+        生成内弧的 G 代码。
 
         根据切割参数生成相应的 G 代码，包括顺时针或逆时针的切圆弧指令。
 
@@ -353,15 +352,15 @@ class InnerHole5Process(P):
         - L (float): 最终的退刀位置（必选）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.deltaT = deltaT
-        self.F = F
-        self.BT = BT
-        self.L = L
+        self.Cn = int(Cn)
+        self.deltaT = float(deltaT)
+        self.F = float(F)
+        self.BT = float(BT)
+        self.L = float(L)
 
     def generate_gcode(self) -> str:
         """
-        生成内孔切割的 G 代码。
+        生成内圆的 G 代码。
 
         根据切割参数生成相应的 G 代码。
 

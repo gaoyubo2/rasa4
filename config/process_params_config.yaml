@@ -49,3 +49,44 @@ sub_process_types:
       - deltaT   # 进刀量
       - CT       # 最后一次进刀的退刀量
       - F        # 进给速度
+  中心孔:
+    required_params:
+      - Cn
+      - L
+      - Tr
+      - Cr
+      - F
+  内锥面:
+    required_params:
+      - Cn
+      - L
+      - Tr
+      - F
+      - A
+      - xDir
+      - zDir
+      - G71G73
+  内槽:
+    required_params:
+      - W
+      - Tw
+      - Cn
+      - Lr
+      - Tr
+      - F
+  内弧:
+    required_params:
+      - R
+      - Tr
+      - Cn
+      - F
+      - G2G3
+      - PHi1
+      - L
+  内圆:
+    required_params:
+      - Cn
+      - deltaT
+      - F
+      - BT
+      - L

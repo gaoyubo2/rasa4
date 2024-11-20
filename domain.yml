@@ -46,6 +46,11 @@ entities:
 - R
 - G2G3
 - PHi1
+- Lr
+- CT
+- W
+- Tw
+- BT
 slots:
   process_type:
     type: rasa.shared.core.slots.TextSlot
@@ -155,6 +160,11 @@ slots:
     initial_value: null
     auto_fill: false
     influence_conversation: true
+  BT:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: false
+    influence_conversation: true
 responses:
   utter_greet:
   - text: Hey! How are you?
@@ -169,6 +179,8 @@ responses:
   - text: 代码已生成
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_ask_deltaT:
+  - text: 请输入 deltaT 值 ：deltaT 表示每次进刀的增量。
   utter_ask_F:
   - text: 请输入 F 值 (例如1000.0)：F 表示进给速度。
   utter_ask_Hr:
@@ -213,6 +225,8 @@ responses:
   - text: 请输入 W 值：加工宽度
   utter_ask_Tw:
   - text: 请输入 Tw 值：刀具宽度
+  utter_ask_BT:
+  - text: 请输入 BT 值：退刀时的增量
   utter_ask_sub_process_type:
   - buttons:
     - payload: /request_gcode{"sub_process_type":"外圆"}

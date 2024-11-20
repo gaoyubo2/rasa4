@@ -39,11 +39,15 @@ class GCodeForm(FormAction):
     def slot_mappings(self) -> dict:
         # 定义如何映射每个插槽的填充规则
         return {
-            "Cn": self.from_text(),  # 通过文本输入填充
+            "F": self.from_text(),
+            "Hr": self.from_text(),
+            "deltaT": self.from_text(),
             "L": self.from_text(),
+            "Cn": self.from_text(),
+
             "Tr": self.from_text(),
             "Cr": self.from_text(),
-            "F": self.from_text(),
+
             "A": self.from_text(),
             "xDir": self.from_text(),
             "zDir": self.from_text(),
@@ -55,6 +59,7 @@ class GCodeForm(FormAction):
             "CT": self.from_text(),
             "W": self.from_text(),
             "Tw": self.from_text(),
+            "BT": self.from_text(),
             "sub_process_type": self.from_text(),  # 通过文本输入填充
         }
 
