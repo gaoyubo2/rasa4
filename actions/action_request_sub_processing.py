@@ -9,7 +9,7 @@ from component.neo4j_service import Neo4jService
 logger = logging.getLogger(__name__)
 
 
-class ActionConfirmProcessing(Action):
+class ActionRequestSubProcessing(Action):
     def name(self) -> str:
         return "action_request_sub_processing"
 
