@@ -44,10 +44,8 @@ class GCodeForm(FormAction):
             "deltaT": self.from_text(),
             "L": self.from_text(),
             "Cn": self.from_text(),
-
             "Tr": self.from_text(),
             "Cr": self.from_text(),
-
             "A": self.from_text(),
             "xDir": self.from_text(),
             "zDir": self.from_text(),
@@ -60,6 +58,12 @@ class GCodeForm(FormAction):
             "W": self.from_text(),
             "Tw": self.from_text(),
             "BT": self.from_text(),
+            "Cr1": self.from_text(),
+            "Tp": self.from_text(),
+            "multi_head": self.from_text(),
+            "tailLength": self.from_text(),
+            "cuttingDepthSelection": self.from_text(),
+            "startA": self.from_text(),
             "sub_process_type": self.from_text(),  # 通过文本输入填充
         }
 

@@ -1,4 +1,5 @@
 import math
+import re
 
 from component.common import P
 import math
@@ -8,14 +9,14 @@ SQRT_2 = 1.4142135623730950
 
 class ScrewThread1Process(P):
     """
-    该类用于生成第一种螺纹加工的 GCode，基于提供的工艺参数生成相应的 GCode。
+    该类用于生成外直螺纹加工的 GCode，基于提供的工艺参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, L: float, Tr: float, Tp: float, Cn: int, Cr: float, multi_head: int,
                  tailLength: float,
                  cuttingDepthSelection: float, **kwargs):
         """
-        初始化螺纹加工过程的参数。
+        初始化外直螺纹加工过程的参数。
 
         参数:
             L (float): 螺纹加工的长度。
@@ -28,14 +29,14 @@ class ScrewThread1Process(P):
             cuttingDepthSelection (float): 切削深度选择，用于决定等距或递减进刀。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.L = L
-        self.Tr = Tr
-        self.Tp = Tp
-        self.Cn = Cn
-        self.Cr = Cr
-        self.multi_head = multi_head
-        self.tailLength = tailLength
-        self.cuttingDepthSelection = cuttingDepthSelection
+        self.L = float(L)
+        self.Tr = float(Tr)
+        self.Tp = float(Tp)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.Cr = float(Cr)
+        self.multi_head = int(re.search(r'\d+', str(multi_head)).group())
+        self.tailLength = float(tailLength)
+        self.cuttingDepthSelection = float(cuttingDepthSelection)
 
     def generate_gcode(self) -> str:
         """
@@ -111,14 +112,14 @@ class ScrewThread1Process(P):
 
 class ScrewThread2Process(P):
     """
-    该类用于生成第二种螺纹加工的 GCode，基于提供的工艺参数生成相应的 GCode。
+    该类用于生成外锥（管）螺纹加工的 GCode，基于提供的工艺参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, L: float, Tr: float, Tp: float, Cn: int, A: float, tailLength: float,
                  startA: float,
                  **kwargs):
         """
-        初始化螺纹加工过程的参数。
+        初始化外锥（管）螺纹加工过程的参数。
 
         参数:
             L (float): 螺纹加工的长度。
@@ -130,13 +131,13 @@ class ScrewThread2Process(P):
             startA (float): 起始角度。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.L = L
-        self.Tr = Tr
-        self.Tp = Tp
-        self.Cn = Cn
-        self.A = A
-        self.tailLength = tailLength
-        self.startA = startA
+        self.L = float(L)
+        self.Tr = float(Tr)
+        self.Tp = float(Tp)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.A = float(A)
+        self.tailLength = float(tailLength)
+        self.startA = float(startA)
 
     def generate_gcode(self) -> str:
         """
@@ -209,13 +210,13 @@ class ScrewThread2Process(P):
 
 class ScrewThread3Process(P):
     """
-    该类用于生成第三种螺纹加工的 GCode，基于提供的工艺参数生成相应的 GCode。
+    该类用于生成内直螺纹加工的 GCode，基于提供的工艺参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, L: float, Tr: float, Tp: float, Cn: int, startA: float, tailLength: float,
                  **kwargs):
         """
-        初始化螺纹加工过程的参数。
+        初始化内直螺纹加工过程的参数。
 
         参数:
             L (float): 螺纹加工的长度。
@@ -226,12 +227,12 @@ class ScrewThread3Process(P):
             tailLength (float): 退尾长度，单位是螺距个数。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.L = L
-        self.Tr = Tr
-        self.Tp = Tp
-        self.Cn = Cn
-        self.startA = startA
-        self.tailLength = tailLength
+        self.L = float(L)
+        self.Tr = float(Tr)
+        self.Tp = float(Tp)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.startA = float(startA)
+        self.tailLength = float(tailLength)
 
     def generate_gcode(self) -> str:
         """
@@ -300,14 +301,14 @@ class ScrewThread3Process(P):
 
 class ScrewThread4Process(P):
     """
-    用于生成第四种螺纹加工的 GCode，基于提供的加工参数生成相应的 GCode。
+    用于生成内锥（管）螺纹加工的 GCode，基于提供的加工参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, L: float, Tr: float, Tp: float, Cn: int, startA: float, A: float,
                  tailLength: float,
                  **kwargs):
         """
-        初始化螺纹加工过程的参数。
+        初始化内锥（管）螺纹加工过程的参数。
 
         参数:
             L (float): 螺纹长度。
@@ -319,17 +320,17 @@ class ScrewThread4Process(P):
             tailLength (float): 退尾长度，以螺距为单位，可以是小数。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.L = L
-        self.Tr = Tr
-        self.Tp = Tp
-        self.Cn = Cn
-        self.startA = startA
-        self.A = A
-        self.tailLength = tailLength
+        self.L = float(L)
+        self.Tr = float(Tr)
+        self.Tp = float(Tp)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.startA = float(startA)
+        self.A = float(A)
+        self.tailLength = float(tailLength)
 
     def generate_gcode(self) -> str:
         """
-        根据工艺参数生成螺纹加工的 GCode。
+        根据工艺参数生成内锥（管）螺纹加工的 GCode。
 
         返回:
             str: 生成的 GCode 字符串。

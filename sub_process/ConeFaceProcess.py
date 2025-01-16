@@ -1,4 +1,5 @@
 import math
+import re
 
 from component.common import P
 
@@ -12,7 +13,7 @@ class ConeFace1Process(P):
                  G71G73: str,
                  **kwargs):
         """
-        初始化锥面加工过程的参数。
+        初始化外反锥面加工过程的参数。
 
         参数:
             Tr (float): 刀具半径或偏移量。
@@ -25,18 +26,18 @@ class ConeFace1Process(P):
             G71G73 (str): GCode模式，'G73' 表示深孔钻削，'G71' 表示粗加工模式。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Tr = Tr
-        self.F = F
-        self.L = L
-        self.Cn = Cn
-        self.A = A
-        self.xDir = xDir
-        self.zDir = zDir
-        self.G71G73 = G71G73
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.L = float(L)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.A = float(A)
+        self.xDir = int(re.search(r'\d+', str(xDir)).group())
+        self.zDir = int(re.search(r'\d+', str(zDir)).group())
+        self.G71G73 = str(G71G73)
 
     def generate_gcode(self) -> str:
         """
-        根据工艺参数生成锥形面加工的 GCode。
+        根据工艺参数生成外反锥面加工的 GCode。
 
         返回:
             str: 生成的 GCode 字符串。
@@ -96,13 +97,13 @@ class ConeFace1Process(P):
 
 class ConeFace2Process(P):
     """
-    该类用于生成第二种锥形面加工的 GCode，基于提供的工艺参数生成相应的 GCode。
+    该类用于内反锥面加工的 GCode，基于提供的工艺参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, Tr: float, F: float, L: float, Cn: int, A: float, Cr: float, xDir: int,
                  zDir: int, G71G73: str, **kwargs):
         """
-        初始化锥面加工过程的参数。
+        初始化内反锥面加工过程的参数。
 
         参数:
             Tr (float): 刀具半径或偏移量。
@@ -111,25 +112,21 @@ class ConeFace2Process(P):
             Cn (int): 切割次数（即工序的循环次数）。
             A (float): 锥形面的角度，单位为度。
             Cr (float): 锥形面的半径。
-            xDir (int): X轴的方向 (-1 表示负向，1 表示正向)。
-            zDir (int): Z轴的方向 (-1 表示负向，1 表示正向)。
             G71G73 (str): GCode模式，'G73' 表示深孔钻削，'G71' 表示粗加工模式。
         """
         super().__init__(sub_process_type, **kwargs)
         self.sub_process_type = sub_process_type
-        self.Tr = Tr
-        self.F = F
-        self.L = L
-        self.Cn = Cn
-        self.A = A
-        self.Cr = Cr
-        self.xDir = xDir
-        self.zDir = zDir
-        self.G71G73 = G71G73
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.L = float(L)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.A = float(A)
+        self.Cr = float(Cr)
+        self.G71G73 = str(G71G73)
 
     def generate_gcode(self) -> str:
         """
-        根据工艺参数生成第二种锥形面加工的 GCode。
+        根据工艺参数生成内反锥面加工的 GCode。
 
         参数:
             textHeadFlag (bool): 是否输出头部标记。
@@ -143,8 +140,6 @@ class ConeFace2Process(P):
         Tr = self.Tr  # 刀具半径
         F = self.F  # 进给速率
         Cn = self.Cn  # 切割次数
-        xDir = self.xDir  # X轴方向
-        zDir = self.zDir  # Z轴方向
         G71G73 = self.G71G73  # GCode模式
         Num = 1  # 初始化循环次数
 
@@ -191,7 +186,7 @@ class ConeFace2Process(P):
 
 class ConeFace3Process(P):
     """
-    该类用于生成第三种锥形面加工的 GCode，基于提供的工艺参数生成相应的 GCode。
+    该类用于生成外正锥面加工的 GCode，基于提供的工艺参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, Tr: float, F: float, L: float, Cn: int, A: float, Cr: float, Cr1: float,
@@ -208,21 +203,19 @@ class ConeFace3Process(P):
             A (float): 锥形面的角度，单位为度。
             Cr (float): 锥形面的半径。
             Cr1 (float): 锥形面的另一个半径。
-            xDir (int): X轴的方向 (-1 表示负向，1 表示正向)。
-            zDir (int): Z轴的方向 (-1 表示负向，1 表示正向)。
             G71G73 (str): GCode模式，'G73' 表示深孔钻削，'G71' 表示粗加工模式。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Tr = Tr
-        self.F = F
-        self.L = L
-        self.Cn = Cn
-        self.A = A
-        self.Cr = Cr
-        self.Cr1 = Cr1
-        self.xDir = xDir
-        self.zDir = zDir
-        self.G71G73 = G71G73
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.L = float(L)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.A = float(A)
+        self.Cr = float(Cr)
+        self.Cr1 = float(Cr1)
+        self.xDir = int(re.search(r'\d+', str(xDir)).group())
+        self.zDir = int(re.search(r'\d+', str(zDir)).group())
+        self.G71G73 = str(G71G73)
 
     def generate_gcode(self) -> str:
         """
@@ -237,8 +230,6 @@ class ConeFace3Process(P):
         Tr = self.Tr  # 刀具半径
         F = self.F  # 进给速率
         Cn = self.Cn  # 切割次数
-        xDir = self.xDir  # X轴方向
-        zDir = self.zDir  # Z轴方向
         G71G73 = self.G71G73  # GCode模式
         Num = 1  # 初始化循环次数
 
@@ -283,7 +274,7 @@ class ConeFace3Process(P):
 
 class ConeFace4Process(P):
     """
-    该类用于生成第四种锥形面加工的 GCode，基于提供的工艺参数生成相应的 GCode。
+    该类用于生成内正锥面锥形面加工的 GCode，基于提供的工艺参数生成相应的 GCode。
     """
 
     def __init__(self, sub_process_type: str, Tr: float, F: float, L: float, Cn: int, A: float, xDir: int, zDir: int,
@@ -301,13 +292,13 @@ class ConeFace4Process(P):
             zDir (int): Z轴的方向 (-1 表示负向，1 表示正向)。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Tr = Tr
-        self.F = F
-        self.L = L
-        self.Cn = Cn
-        self.A = A
-        self.xDir = xDir
-        self.zDir = zDir
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.L = float(L)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.A = float(A)
+        self.xDir = int(re.search(r'\d+', str(xDir)).group())
+        self.zDir = int(re.search(r'\d+', str(zDir)).group())
 
     def generate_gcode(self) -> str:
         """
@@ -322,8 +313,7 @@ class ConeFace4Process(P):
         Tr = self.Tr  # 刀具半径
         F = self.F  # 进给速率
         Cn = self.Cn  # 切割次数
-        xDir = self.xDir  # X轴方向
-        zDir = self.zDir  # Z轴方向
+
         Num = 1  # 初始化循环次数
 
         for a in range(Cn):

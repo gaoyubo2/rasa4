@@ -90,7 +90,7 @@ class InnerHole2Process(P):
                  G71G73: int,
                  **kwargs):
         """
-        初始化内孔加工 G 代码生成器。
+        初始化内锥面加工 G 代码生成器。
 
         参数:
         - Cn (int): 进刀次数（必选）。
@@ -174,7 +174,7 @@ class InnerHole3Process(P):
 
     def __init__(self, sub_process_type: str, W: float, Tw: float, Cn: int, Lr: float, Tr: float, F: float,  **kwargs):
         """
-        初始化内孔切槽 G 代码生成器。
+        初始化内槽 G 代码生成器。
 
         参数:
         - W (float): 开口宽度（必选）。
@@ -252,7 +252,7 @@ class InnerHole4Process(P):
     def __init__(self, sub_process_type: str,  R: float, Tr: float, Cn: int, F: float, G2G3: int, PHi1: float, L: float,
                  **kwargs):
         """
-        初始化内孔切割 G 代码生成器。
+        初始化内弧 G 代码生成器。
 
         参数:
         - R (float): 半径（必选）。
@@ -342,7 +342,7 @@ class InnerHole5Process(P):
 
     def __init__(self, sub_process_type: str, Cn: int, deltaT: float, F: float, BT: float, L: float,  **kwargs):
         """
-        初始化内孔切割 G 代码生成器。
+        初始化内圆 G 代码生成器。
 
         参数:
         - Cn (int): 进刀次数（必选）。

@@ -83,7 +83,8 @@ class ActionRequestProcessing(Action):
         # 用户输入不为null，查询相似度
         similarities = []  # 用于存储相似度信息
         matching_processes = []  # 用于存储符合相似度要求的工艺及其相似度
-
+        if len(user_input_process) < 4:
+            user_input_process = user_input_process + "工艺"
         for process in all_processes:
             similarity = calculate_similarity(user_input_process, process)
             similarities.append((process, similarity))  # 存储工艺和对应的相似度

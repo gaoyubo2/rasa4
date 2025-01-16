@@ -44,29 +44,29 @@ def get_process_instance(sub_process_type: str, **kwargs):
         return InnerHole4Process(sub_process_type, **kwargs)
     elif sub_process_type == "内圆":
         return InnerHole5Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CONE_FACE_ONE":
+    elif sub_process_type == "外反锥面":
         return ConeFace1Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CONE_FACE_TWO":
+    elif sub_process_type == "内反锥面":
         return ConeFace2Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CONE_FACE_THREE":
+    elif sub_process_type == "外正锥面":
         return ConeFace3Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CONE_FACE_FOUR":
+    elif sub_process_type == "内正锥面":
         return ConeFace4Process(sub_process_type, **kwargs)
-    elif sub_process_type == "SCREW_THREAD_ONE":
+    elif sub_process_type == "外直螺纹":
         return ScrewThread1Process(sub_process_type, **kwargs)
-    elif sub_process_type == "SCREW_THREAD_TWO":
+    elif sub_process_type == "外锥（管）螺纹":
         return ScrewThread2Process(sub_process_type, **kwargs)
-    elif sub_process_type == "SCREW_THREAD_THREE":
+    elif sub_process_type == "内直螺纹":
         return ScrewThread3Process(sub_process_type, **kwargs)
-    elif sub_process_type == "SCREW_THREAD_FOUR":
+    elif sub_process_type == "内锥（管）螺纹":
         return ScrewThread4Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CHAMFER_ONE":
+    elif sub_process_type == "外圆角倒角":
         return Chamfer1Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CHAMFER_TWO":
+    elif sub_process_type == "外倒角":
         return Chamfer2Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CHAMFER_THREE":
+    elif sub_process_type == "内圆角倒角":
         return Chamfer3Process(sub_process_type, **kwargs)
-    elif sub_process_type == "CHAMFER_FOUR":
+    elif sub_process_type == "内倒角":
         return Chamfer4Process(sub_process_type, **kwargs)
     else:
-        raise ValueError(f"Unknown process type: {sub_process_type}")
+        raise ValueError(f"暂不支持加工工艺: {sub_process_type}")

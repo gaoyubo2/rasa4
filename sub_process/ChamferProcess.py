@@ -1,18 +1,19 @@
 import math
+import re
 
 from component.common import P
 
 
 class Chamfer1Process(P):
     """
-    用于生成倒角1的GCode，支持G71和G73模式下的GCode生成。
+    用于生成外圆角倒角1的GCode，支持G71和G73模式下的GCode生成。
     """
 
     def __init__(self, sub_process_type: str, R: float, Tr: float, Cn: int, F: float, G2G3: int, PHi1: float, L: float,
                  G71G73: int,
                  **kwargs):
         """
-        初始化倒角加工过程的参数。
+        初始化外圆角倒角加工过程的参数。
 
         参数:
             R (float): 圆弧半径。
@@ -25,14 +26,15 @@ class Chamfer1Process(P):
             G71G73 (int): 加工模式（G71 或 G73）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.R = R
-        self.Tr = Tr
-        self.Cn = Cn
-        self.F = F
-        self.G2G3 = G2G3
-        self.PHi1 = PHi1
-        self.L = L
-        self.G71G73 = G71G73
+        # 转化为适当的类型
+        self.R = float(R)  # 转化为浮动数
+        self.Tr = float(Tr)  # 转化为浮动数
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())  # 提取第一个出现的数字，并转为整数
+        self.F = float(F)  # 转化为浮动数
+        self.G2G3 = int(G2G3)  # 转化为整数
+        self.PHi1 = float(PHi1)  # 转化为浮动数
+        self.L = float(L)  # 转化为浮动数
+        self.G71G73 = int(G71G73)  # 转化为整数
 
     def generate_gcode(self) -> str:
         """
@@ -99,14 +101,14 @@ class Chamfer1Process(P):
 
 class Chamfer2Process(P):
     """
-    用于生成倒角2的GCode，支持G71和G73模式下的GCode生成。
+    用于生成外倒角的GCode，支持G71和G73模式下的GCode生成。
     """
 
     def __init__(self, sub_process_type: str, Cn: int, Tr: float, F: float, L: float, A: float, xDir: int, zDir: int,
                  G71G73: int,
                  **kwargs):
         """
-        初始化倒角加工过程的参数。
+        初始化外倒角加工过程的参数。
 
         参数:
             Cn (int): 进刀次数。
@@ -119,14 +121,19 @@ class Chamfer2Process(P):
             G71G73 (int): 加工模式（G71 或 G73）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.Tr = Tr
-        self.F = F
-        self.L = L
-        self.A = A
-        self.xDir = xDir
-        self.zDir = zDir
-        self.G71G73 = G71G73
+        # 提取Cn中的整数部分
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())  # 提取第一个出现的数字，并转为整数
+        # 提取xDir中的整数部分
+        self.xDir = int(re.search(r'\d+', str(xDir)).group())
+        # 提取zDir中的整数部分
+        self.zDir = int(re.search(r'\d+', str(zDir)).group())
+        # 提取G71G73中的整数部分
+        self.G71G73 = int(re.search(r'\d+', str(G71G73)).group())
+        # 转换为浮动数
+        self.Tr = float(Tr)
+        self.F = float(F)
+        self.L = float(L)
+        self.A = float(A)
 
     def generate_gcode(self) -> str:
         """
@@ -189,14 +196,14 @@ class Chamfer2Process(P):
 
 class Chamfer3Process(P):
     """
-    用于生成倒角3的GCode，支持G71和G73模式下的GCode生成。
+    用于生成内圆角倒角的GCode，支持G71和G73模式下的GCode生成。
     """
 
     def __init__(self, sub_process_type: str, R: float, Tr: float, Cn: int, F: float, G2G3: int, PHi1: float, L: float,
                  G71G73: int,
                  **kwargs):
         """
-        初始化倒角加工过程的参数。
+        初始化内圆角倒角加工过程的参数。
 
         参数:
             R (float): 圆弧半径。
@@ -209,14 +216,14 @@ class Chamfer3Process(P):
             G71G73 (int): 加工模式（G71 或 G73）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.R = R
-        self.Tr = Tr
-        self.Cn = Cn
-        self.F = F
-        self.G2G3 = G2G3
-        self.PHi1 = PHi1
-        self.L = L
-        self.G71G73 = G71G73
+        self.R = float(R)
+        self.Tr = float(Tr)
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.F = float(F)
+        self.G2G3 = int(re.search(r'\d+', str(G2G3)).group())
+        self.PHi1 = float(PHi1)
+        self.L = float(L)
+        self.G71G73 = int(re.search(r'\d+', str(G71G73)).group())
 
     def generate_gcode(self) -> str:
         """
@@ -274,14 +281,14 @@ class Chamfer3Process(P):
 
 class Chamfer4Process(P):
     """
-    用于生成倒角4的GCode，支持G71和G73模式下的GCode生成。
+    用于生成内倒角的GCode，支持G71和G73模式下的GCode生成。
     """
 
     def __init__(self, sub_process_type: str, Cn: int, Tr: float, L: float, F: float, A: float, xDir: int, zDir: int,
                  G71G73: int,
                  **kwargs):
         """
-        初始化倒角加工过程的参数。
+        初始化内倒角加工过程的参数。
 
         参数:
             Cn (int): 进刀次数。
@@ -294,14 +301,14 @@ class Chamfer4Process(P):
             G71G73 (int): 加工模式（G71 或 G73）。
         """
         super().__init__(sub_process_type, **kwargs)
-        self.Cn = Cn
-        self.Tr = Tr
-        self.L = L
-        self.F = F
-        self.A = A
-        self.xDir = xDir
-        self.zDir = zDir
-        self.G71G73 = G71G73
+        self.Cn = int(re.search(r'\d+', str(Cn)).group())
+        self.Tr = float(Tr)
+        self.L = float(L)
+        self.F = float(F)
+        self.A = float(A)
+        self.xDir = int(re.search(r'\d+', str(xDir)).group())
+        self.zDir = int(re.search(r'\d+', str(zDir)).group())
+        self.G71G73 = int(re.search(r'\d+', str(G71G73)).group())
 
     def generate_gcode(self) -> str:
         """
