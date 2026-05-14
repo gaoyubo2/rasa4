@@ -1,4 +1,7 @@
 ## 启动命令
+需要三个cmd窗口
 ```cmd
-rasa run --enable-api -m models/20241203-175017.tar.gz --port 5000 --cors "*"
+rasa run actions
+rasa x
+neo4j console
 ```

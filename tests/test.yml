@@ -1,0 +1,410 @@
+version: "2.0"
+nlu:
+- intent: greet
+  examples: |
+
+    - hello
+
+    - 早上好
+- intent: goodbye
+  examples: |
+
+    - bye
+
+    - goodbye
+- intent: affirm
+  examples: |
+
+    - 行
+
+    - yes
+- intent: deny
+  examples: |
+
+    - 不
+
+    - 错误
+- intent: mood_great
+  examples: |
+
+    - good
+
+    - 很好
+- intent: mood_unhappy
+  examples: |
+
+    - 失败
+
+    - 不满意
+- intent: bot_challenge
+  examples: |
+
+    - are you a bot?
+- intent: inquire_neo4j
+  examples: |
+
+    - 获取加工参数数据库
+
+    - 查G71相关加工记录
+
+    - 查G71相关加工记录
+
+    - 查询外圆加工工艺数据
+
+    - 查工艺知识图谱
+
+    - 查询刀具路径信息
+
+    - 从Neo4j查询CNC数据
+
+    - 查询刀具路径信息
+
+    - 查G71相关加工记录
+
+    - 查G71相关加工记录
+
+    - 查找所有G代码案例
+
+    - 查找所有G代码案例
+
+    - 获取加工参数数据库
+
+    - 获取加工参数数据库
+
+    - 有没有螺纹加工信息
+
+    - 查工艺知识图谱
+
+    - 获取加工参数数据库
+
+    - 查找所有G代码案例
+
+    - 查找所有G代码案例
+
+    - 查工艺知识图谱 
+- intent: request_gcode
+  examples: |
+
+    - 做一个加工代码
+
+    - 生成数控加工程序
+
+    - 我想生成G代码
+
+    - 生成机床代码
+
+    - 生成G71/G72程序
+
+    - 创建CNC程序
+
+    - 我想生成G代码
+
+    - 生成G71/G72程序
+
+    - 生成数控加工程序
+
+    - 我想生成G代码
+
+    - 帮我写加工程序
+
+    - 我想生成G代码
+
+    - 我要一个G-code程序
+
+    - 创建CNC程序
+
+    - 我想生成G代码
+
+    - 帮我生成一个G代码
+
+    - 做一个加工代码
+
+    - 做一个加工代码
+
+    - 我要一个G-code程序
+
+    - 创建CNC程序 
+- intent: request_sub_processing
+  examples: |
+
+    - [内锥螺纹](sub_process_type)怎么加工
+
+    - [外圆弧](sub_process_type)怎么加工
+
+    - 帮我做[外圆面](sub_process_type)的G代码
+
+    - 我想加工[中心孔](sub_process_type)子工艺
+
+    - [内锥面](sub_process_type)怎么加工
+
+    - 我要[切槽](sub_process_type)加工方案
+
+    - [外反锥面](sub_process_type)程序怎么写
+
+    - [外正锥面](sub_process_type)怎么加工
+
+    - [外锥螺纹](sub_process_type)怎么加工
+
+    - 帮我做[外正锥面](sub_process_type)的G代码
+
+    - 帮我做[中心孔](sub_process_type)的G代码
+
+    - [外反锥面](sub_process_type)怎么加工
+
+    - 车一个[外倒角](sub_process_type)
+
+    - 车一个[内锥螺纹](sub_process_type)
+
+    - 帮我做[端面](sub_process_type)的G代码
+
+    - 我要[内弧](sub_process_type)加工方案
+
+    - [外圆角倒角](sub_process_type)怎么加工
+
+    - 帮我做[外锥螺纹](sub_process_type)的G代码
+
+    - 生成[外正锥面](sub_process_type)工艺
+
+    - 帮我做[内倒角](sub_process_type)的G代码 
+- intent: request_processing
+  examples: |
+
+    - 我计划搞一个一个[内锥面](process_type)，[1.14](deltaT)，L[66.72](L)，Cn是[30](Cn)，[103](F)，BT[1.43](BT)
+
+    - 需要创建[内倒角](process_type)，R是[1.67](R)，A是[34](A)，Cn是[27](Cn)，[36](PHi1)
+
+    - 创建这个[内圆角倒角](process_type)，R是[3.78](R)，A[13](A)，[120](F)，Cn是[26](Cn)
+
+    - 请帮我编写这个[外正锥面](process_type)，xDir是[-1](xDir)，Tr[5.16](Tr)，A是[11](A)，L是[114.41](L)，zDir[-1](zDir)，[87](F)
+
+    - 搞一个一个[端面](process_type)，Tr是[1.04](Tr)，[2.6](CT)，F是[190](F)，[6.35](W)，Cn是[6](Cn)
+
+    - 请帮我编写一个[外倒角](process_type)，A[73](A)，[160](F)，R[5.58](R)，PHi1[37](PHi1)
+
+    - 我计划搞一个[内正锥面](process_type)，A是[33](A)，L是[25.87](L)，F是[126](F)，[8](Cn)
+
+    - 我计划创建该[外倒角](process_type)，Cn是[16](Cn)，[46](PHi1)，[111](F)，精度高一点
+
+    - 编写一个[内锥螺纹](process_type)，multi_head[5](multi_head)，L[35.45](L)，[112.74](tailLength)，Tr是[1.01](Tr)，[4](Tp)
+
+    - 需要搞一个该[外锥螺纹](process_type)，tailLength[107.3](tailLength)，Tp是[3](Tp)，L[135.79](L)，Cn[12](Cn)，[3](multi_head)，Tr[5.44](Tr)
+
+    - 帮我设计该[内端面](process_type)，Lr[38.3](Lr)，F[165](F)，Tw是[3.39](Tw)，CT[2.53](CT)，Cn是[19](Cn)，W是[9.76](W)，差不多就行
+
+    - 需要搞一个[外反锥面](process_type)，Cn是[18](Cn)，[99.38](L)，F[158](F)，zDir[-1](zDir)，A是[32](A)
+
+    - 请帮我搞一个这个[内正锥面](process_type)，[20](Cn)，A是[25](A)，xDir[+1](xDir)，zDir是[-1](zDir)
+
+    - 做一个该[外倒角](process_type)，R是[0.75](R)，PHi1[31](PHi1)
+
+    - 我想编写一个[外圆](process_type)，L是[58.86](L)，[98](F)，Tr[1.95](Tr)，A是[88](A)，Cn[17](Cn)
+
+    - 我想加工该[内锥面](process_type)，[29](Cn)，A[45](A)，F是[108](F)，[1.12](deltaT)，[0.96](BT)
+
+    - 请帮我设计一个[外圆弧](process_type)，L[74.22](L)，A是[10](A)，Cn[7](Cn)，Tr[2.15](Tr)，F是[122](F)
+
+    - 我计划生成该[内锥面](process_type)，L是[71.21](L)，BT是[0.86](BT)，[86](F)，[63](A)
+
+    - 加工该[外正锥面](process_type)，[84](F)，A[46](A)
+
+    - 创建一个[内正锥面](process_type)，Cn[19](Cn)，F[112](F)，[2.36](Tr)，zDir[-1](zDir)，速度快一点
+
+    - 我要创建[内正锥面](process_type)，[26](A)，[142](F)，[3.99](Tr)，zDir[-1](zDir)，[6](Cn)，[+1](xDir)
+
+    - 我计划生成该[外圆角倒角](process_type)，R是[4.17](R)，[29](Cn)，[28](PHi1)
+
+    - 我打算编写该[内槽](process_type)，BT[0.97](BT)，[46](A)，[0.72](deltaT)，Cn是[17](Cn)，L是[66.86](L)
+
+    - 需要加工这个[内圆](process_type)，A[56](A)，F是[189](F)，[2.87](BT)，[114.73](L)
+
+    - 我计划做一个[内圆角倒角](process_type)，F是[113](F)，PHi1[17](PHi1)，R[1.26](R)，Cn是[21](Cn)，差不多就行
+
+    - 帮我搞一个[外锥螺纹](process_type)，L是[92.81](L)，Tr[0.51](Tr)，[11](Cn)，Tp[6](Tp)，multi_head[2](multi_head)，[74.24](tailLength)
+
+    - 创建一个[外直螺纹](process_type)，tailLength是[109.9](tailLength)，Cn是[23](Cn)，multi_head是[5](multi_head)，Tp[1](Tp)，L[86.99](L)
+
+    - 我打算创建一个[外锥螺纹](process_type)，Cn是[22](Cn)，[4.97](Tr)，L是[117.46](L)，[5](multi_head)，Tp是[7](Tp)，tailLength[104.76](tailLength)
+
+    - 需要设计一个[外倒角](process_type)，A[63](A)，[64](PHi1)，[23](Cn)，[3.18](R)
+
+    - 请帮我创建[中心孔](process_type)，L是[77.29](L)，BT是[2.77](BT)，F[159](F)，Cn是[11](Cn)，A是[22](A)，速度快一点
+
+    - 编写[内槽](process_type)，L是[115.76](L)，[0.86](deltaT)，BT是[2.48](BT)，[45](A)，速度快一点
+
+    - 帮我创建[外直螺纹](process_type)，Cn是[14](Cn)，[34.62](L)，Tp[5](Tp)，multi_head[5](multi_head)，不用太精确
+
+    - 我要做一个这个[切槽](process_type)，Lr是[106.6](Lr)，F[104](F)，Tr[3.14](Tr)，[5.46](Tw)，Cn[24](Cn)，不用太精确
+
+    - 请帮我设计该[外倒角](process_type)，F[183](F)，PHi1[28](PHi1)，[71](A)
+
+    - 请帮我生成该[外正锥面](process_type)，[3.47](Tr)，[125](F)，[65](A)，L[20.1](L)，xDir[+1](xDir)，[+1](zDir)
+
+    - 需要编写一个[外正锥面](process_type)，xDir[+1](xDir)，[74](A)，L是[122.14](L)，Tr是[2.05](Tr)
+
+    - 我打算创建一个[中心孔](process_type)，BT是[1.5](BT)，F[112](F)，deltaT[0.27](deltaT)，[69](A)，L是[98.58](L)，速度快一点
+
+    - 我想做一个一个[外圆](process_type)，A是[37](A)，L是[79.88](L)，[1.86](Tr)，F[199](F)，[17](Cn)，精度高一点
+
+    - 需要生成该[内倒角](process_type)，PHi1[56](PHi1)，[104](F)，[49](A)
+
+    - 我想编写[外正锥面](process_type)，[-1](xDir)，[18](Cn)，A[84](A)，F是[84](F)，zDir是[+1](zDir)
+
+    - 我打算设计该[内圆角倒角](process_type)，PHi1是[13](PHi1)，R[1.27](R)，随便给个参数
+
+    - 我打算创建该[内端面](process_type)，[5.33](W)，F[113](F)，Tw[2.39](Tw)，Cn是[28](Cn)，Tr[3.77](Tr)
+
+    - 需要编写该[切槽](process_type)，[8.94](W)，Cn[26](Cn)，Lr[44.8](Lr)，[155](F)，CT是[2.91](CT)
+
+    - 我要加工一个[外直螺纹](process_type)，[22.18](L)，Cn[7](Cn)，Tp[5](Tp)，[3.89](Tr)，multi_head[4](multi_head)
+
+    - 做一个该[外正锥面](process_type)，Cn[19](Cn)，F是[127](F)，L是[82.08](L)，zDir[+1](zDir)，A是[30](A)，[1.51](Tr)，速度快一点
+
+    - 需要生成[外锥面](process_type)，[114.89](L)，A是[64](A)，[158](F)，Tr是[5.28](Tr)
+
+    - 我打算生成[内倒角](process_type)，[66](PHi1)，[25](A)，R[1.7](R)，Cn[28](Cn)
+
+    - 我打算生成该[内锥面](process_type)，L是[57.07](L)，[33](A)，Cn[20](Cn)，F[98](F)
+
+    - 需要设计[外圆面](process_type)，[65](A)，Tr[2.26](Tr)，[28](Cn)，差不多就行
+
+    - 帮我创建该[内倒角](process_type)，Cn[24](Cn)，PHi1是[40](PHi1)，[47](A)
+
+    - 做一个该[内正锥面](process_type)，[115](F)，[0.84](Tr)，zDir是[+1](zDir)，xDir是[-1](xDir)，不用太精确
+
+    - 请帮我加工[端面](process_type)，Tr[4.0](Tr)，CT是[0.72](CT)，Cn是[22](Cn)
+
+    - 我计划设计这个[端面](process_type)，Lr[24.19](Lr)，W[5.68](W)，CT是[3.72](CT)，Tr是[5.63](Tr)
+
+    - 帮我编写一个[内圆](process_type)，deltaT是[1.79](deltaT)，[132](F)，BT[0.71](BT)，A是[18](A)，Cn是[16](Cn)
+
+    - 搞一个[外圆角倒角](process_type)，PHi1[20](PHi1)，R[5.94](R)，Cn[25](Cn)
+
+    - 我计划创建这个[内端面](process_type)，[11.98](W)，[109.94](Lr)，Tw是[5.03](Tw)，[184](F)，CT是[1.83](CT)，Cn是[16](Cn)
+
+    - 请帮我生成一个[内槽](process_type)，F[185](F)，L[81.64](L)，deltaT[0.9](deltaT)，Cn是[13](Cn)，随便给个参数
+
+    - 需要生成这个[外圆面](process_type)，[1.11](Tr)，[19](Cn)，[73](A)，[123.93](L)，速度快一点
+
+    - 帮我搞一个该[内直螺纹](process_type)，L是[94.02](L)，[1](multi_head)，[96.03](tailLength)，Tp[2](Tp)
+
+    - 需要加工[内圆角倒角](process_type)，F[143](F)，PHi1[34](PHi1)，A是[52](A)，Cn[6](Cn)
+
+    - 我打算做一个这个[端面](process_type)，Tw[4.54](Tw)，[21](Cn)，[1.07](Tr)，[30.62](Lr)，[2.92](CT)
+
+    - 请帮我设计该[内弧](process_type)，deltaT是[0.39](deltaT)，A[62](A)，Cn[7](Cn)，BT[1.4](BT)，[105.64](L)，F[92](F)
+
+    - 我计划做一个一个[外直螺纹](process_type)，Tr是[5.87](Tr)，L[77.16](L)，Tp[2](Tp)，tailLength[100.31](tailLength)
+
+    - 创建该[外圆](process_type)，[11](Cn)，L[109.42](L)，A[85](A)，Tr[4.88](Tr)，F[145](F)
+
+    - 我要做一个一个[内反锥面](process_type)，Tr[2.47](Tr)，L是[89.95](L)，[187](F)，A是[42](A)，Cn是[8](Cn)，[-1](zDir)，xDir[-1](xDir)
+
+    - 需要生成该[外锥面](process_type)，F是[147](F)，Cn是[15](Cn)，L是[36.07](L)，不用太精确
+
+    - 我计划设计一个[外正锥面](process_type)，zDir是[-1](zDir)，[+1](xDir)，[1.79](Tr)，[28](A)，Cn[27](Cn)，[114](F)
+
+    - 我想设计一个[外正锥面](process_type)，[19](Cn)，[140](F)，zDir是[+1](zDir)，A[20](A)，Tr是[2.73](Tr)，L是[145.59](L)，[-1](xDir)
+
+    - 我想创建该[外锥螺纹](process_type)，L[111.66](L)，Cn是[27](Cn)，Tp是[7](Tp)，tailLength[103.67](tailLength)，[2.23](Tr)
+
+    - 请帮我搞一个该[内圆角倒角](process_type)，[2.05](R)，[6](Cn)，[65](PHi1)，F[185](F)，[13](A)，随便给个参数
+
+    - 我计划编写这个[外圆面](process_type)，[8](Cn)，Tr是[4.75](Tr)，F是[124](F)，A[51](A)
+
+    - 我想搞一个一个[内反锥面](process_type)，[19](A)，F[193](F)，L是[67.17](L)，Cn[5](Cn)，xDir[-1](xDir)
+
+    - 帮我加工这个[内锥面](process_type)，[53](A)，BT是[1.93](BT)，deltaT是[1.47](deltaT)，Cn是[6](Cn)，F[163](F)
+
+    - 我打算搞一个[内锥螺纹](process_type)，Tp是[7](Tp)，[5.39](Tr)，L是[116.03](L)，multi_head是[3](multi_head)
+
+    - 我打算生成该[中心孔](process_type)，L[143.69](L)，BT是[2.81](BT)，[49](A)，deltaT是[2.12](deltaT)，差不多就行
+
+    - 我打算创建一个[中心孔](process_type)，Cn是[10](Cn)，A是[22](A)，deltaT是[0.74](deltaT)，BT[2.4](BT)，F是[117](F)
+
+    - 搞一个该[内槽](process_type)，A[46](A)，[1.25](deltaT)，L是[26.92](L)，Cn[24](Cn)
+
+    - 我打算设计这个[内圆](process_type)，BT[2.71](BT)，Cn是[18](Cn)，[1.79](deltaT)
+
+    - 我计划搞一个该[内圆角倒角](process_type)，PHi1是[42](PHi1)，[10](A)，[93](F)，不用太精确
+
+    - 我想设计[外正锥面](process_type)，Tr是[2.64](Tr)，A是[33](A)，xDir[+1](xDir)，Cn是[10](Cn)，L[24.74](L)，zDir[-1](zDir)
+
+    - 需要做一个这个[切槽](process_type)，[23](Cn)，[52.72](Lr)，W[11.95](W)，F[82](F)
+
+    - 我计划做一个一个[外圆面](process_type)，F是[152](F)，L是[21.52](L)，A是[81](A)，Tr[0.79](Tr)
+
+    - 需要创建一个[切槽](process_type)，[1.35](CT)，F[81](F)，W是[4.99](W)，[26](Cn)，Lr是[138.97](Lr)，差不多就行
+
+    - 我想生成这个[外圆](process_type)，A[37](A)，Cn[27](Cn)，Tr[3.96](Tr)，[136](F)，不用太精确
+
+    - 搞一个该[外反锥面](process_type)，Tr[0.81](Tr)，A是[27](A)，[11](Cn)，[-1](zDir)，[188](F)，[146.22](L)，[+1](xDir)
+
+    - 我打算搞一个该[内弧](process_type)，A是[56](A)，[0.63](deltaT)，[193](F)，Cn是[17](Cn)
+
+    - 需要生成[外圆弧](process_type)，Tr[2.44](Tr)，L[76.95](L)，[12](Cn)，A[57](A)，F[99](F)
+
+    - 请帮我搞一个[内弧](process_type)，[107](F)，[17](A)，[132.46](L)，[1.63](deltaT)
+
+    - 我要生成该[内反锥面](process_type)，Tr是[1.11](Tr)，[13](Cn)，[-1](xDir)，[29.4](L)，zDir[-1](zDir)，随便给个参数
+
+    - 我计划生成该[内端面](process_type)，F是[88](F)，Tw是[7.28](Tw)，[118.28](Lr)，W是[5.33](W)，[24](Cn)，[1.01](Tr)
+
+    - 需要设计这个[内端面](process_type)，[183](F)，Tw是[10.43](Tw)，W[11.36](W)，Lr是[78.08](Lr)，[13](Cn)
+
+    - 我要做一个[外倒角](process_type)，F是[165](F)，Cn是[30](Cn)，R是[5.09](R)，[86](A)，[48](PHi1)
+
+    - 我想加工这个[内槽](process_type)，L是[40.98](L)，F是[154](F)，[0.85](deltaT)
+
+    - 帮我设计[外圆弧](process_type)，[82](A)，L是[148.15](L)，Tr[1.54](Tr)，F[119](F)，Cn是[26](Cn)
+
+    - 需要设计一个[外反锥面](process_type)，F[112](F)，xDir是[-1](xDir)，[17](Cn)，Tr是[0.99](Tr)，L是[25.12](L)，A是[49](A)，zDir[-1](zDir)
+
+    - 我要做一个该[内直螺纹](process_type)，[75.41](tailLength)，multi_head是[3](multi_head)，Tr是[4.58](Tr)，L[89.28](L)，Tp是[8](Tp)，[22](Cn)
+
+    - 设计这个[内反锥面](process_type)，xDir[-1](xDir)，[144](F)，A是[77](A)，Tr[4.66](Tr)，随便给个参数
+
+    - 我打算搞一个一个[切槽](process_type)，W是[4.38](W)，Tr[1.36](Tr)，Lr是[89.37](Lr)，[91](F)，差不多就行
+
+    - 需要生成一个[内圆角倒角](process_type)，[26](A)，[41](PHi1)，R是[2.83](R)，F是[98](F)，Cn[26](Cn)，速度快一点
+
+    - 请帮我生成该[外倒角](process_type)，A是[45](A)，Cn是[30](Cn)，PHi1[16](PHi1)，R是[3.48](R)
+
+    - 需要生成一个[内反锥面](process_type)，A[13](A)，zDir是[+1](zDir)，L[64.42](L)，[3.69](Tr)，[15](Cn)，[197](F)
+
+    - 编写该[内直螺纹](process_type)，[87.41](L)，multi_head[1](multi_head)，Tr是[3.17](Tr)，[7](Tp)，Cn[28](Cn)
+
+    - 我想编写这个[外圆](process_type)，F[168](F)，A[15](A)，L[31.32](L)
+
+    - 帮我设计这个[内倒角](process_type)，R[2.33](R)，[32](PHi1)，[17](Cn)，[65](A)
+
+    - 帮我编写这个[外锥面](process_type)，[70.83](L)，F[115](F)，Cn是[7](Cn)，[4.06](Tr)，[53](A)，精度高一点
+
+    - 请帮我生成该[外倒角](process_type)，PHi1是[69](PHi1)，F是[106](F)，[10](Cn)，R[2.31](R)，[79](A)
+
+    - 我打算创建一个[外正锥面](process_type)，xDir是[+1](xDir)，F是[189](F)，Cn是[27](Cn)，A[37](A)，L[82.44](L)
+
+    - 我要生成这个[外圆弧](process_type)，[3.29](Tr)，L是[21.88](L)，[18](Cn)
+
+    - 我打算做一个[内倒角](process_type)，PHi1[11](PHi1)，R[4.67](R)，[111](F)，A[35](A)，Cn[6](Cn)
+
+    - 生成[外直螺纹](process_type)，[80.99](tailLength)，[61.86](L)，[4.71](Tr)，[7](Cn)
+
+    - 我计划设计[外正锥面](process_type)，F[189](F)，Tr[2.08](Tr)，[-1](zDir)，[68](A)，[85.09](L)，Cn[8](Cn)，xDir是[+1](xDir)
+
+    - 我计划生成一个[内弧](process_type)，F是[177](F)，deltaT[2.14](deltaT)，BT是[2.83](BT)，L[21.75](L)
+
+    - 需要创建该[外锥面](process_type)，L[32.58](L)，Cn是[13](Cn)，F[142](F)，[0.56](Tr)，不用太精确
+
+    - 创建这个[中心孔](process_type)，A[66](A)，deltaT是[2.48](deltaT)，F是[177](F)，BT是[1.68](BT)
+
+    - 我计划创建[内端面](process_type)，W是[8.12](W)，Cn[29](Cn)，F是[82](F)，Tw[6.1](Tw)，Lr[145.59](Lr)，Tr是[5.15](Tr)
+
+    - 搞一个该[切槽](process_type)，Tr[1.64](Tr)，Tw[7.91](Tw)，W[5.66](W)，Lr[120.74](Lr)，Cn[12](Cn)，CT[1.27](CT)
+
+    - 我计划做一个一个[内锥螺纹](process_type)，[20](Cn)，Tr[5.06](Tr)，tailLength是[112.48](tailLength)，multi_head是[2](multi_head)
+
+    - 帮我加工一个[外圆弧](process_type)，F[173](F)，[30](Cn)，Tr是[3.42](Tr)
+
+    - 我要加工[外圆面](process_type)，Cn是[13](Cn)，[76](A)，L[129.64](L)，Tr[1.4](Tr)，速度快一点
+
+    - 需要做一个[内锥面](process_type)，Cn[11](Cn)，deltaT是[1.86](deltaT)，BT是[1.89](BT)，F是[119](F)，L是[142.15](L)，A是[57](A) 

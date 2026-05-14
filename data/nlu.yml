@@ -112,8 +112,33 @@ nlu:
     - 我需要做[外倒角](process_type)加工，进刀次数是[8](Cn)，倒角角度[60](A)，进给速度是[130](F)
     - 我打算加工[内倒角](process_type)，进刀次数是[9](Cn)，倒角角度[40](A)，进给速度是[125](F)
     - 我想加工一个[外圆](process_type)，进刀次数[12](Cn)，长度[50](L)，速度[1300](F)
+    - 我想加工一个[外圆](process_type)
+    - 帮我生成一个[外圆弧](process_type)的G代码
+    - 加工[外锥面](process_type)，进给速度是[120](F)
+    - 我要做[切槽](process_type)，宽度是[8](W)
+    - 我需要一个[内圆](process_type)，长度是[50](L)
+    - 进给速度[120](F)，长度[50](L)，我要加工[外圆](process_type)
+    - 长度是[60](L)，我想做一个[外圆弧](process_type)，进刀次数[8](Cn)
+    - [外锥面](process_type)，进刀深度[4](Tr)，我要加工
+    - 进刀次数[10](Cn)，我要做[内圆](process_type)
+    - 我想加工一个[外圆](process_type)，进给速度快一点
+    - 做一个[外圆弧](process_type)，角度大概[30](A)
+    - 加工[内锥面](process_type)，长度差不多[50](L)
+    - 我想加工一个[外元](process_type)，长度[50](L)，速度[120](F)
+    - 帮我做一个[外圆面](process_type)，进刀次数[10](Cn)
+    - 加工[外圆形](process_type)，长度[60](L)
+    - 我要加工[内圆](process_type)，进给速度快一点
+    - 做一个[切槽](process_type)，宽度差不多[10](W)
+    - 我需要加工[外锥面](process_type)，角度大约[45](A)
+    - 加工[内圆](process_type)，长度[55](L)，进给速度快一点
+    - 我要做[外圆弧](process_type)，角度差不多[25](A)，速度快一点
+    - 帮我生成[外圆](process_type)，长度[70](L)
+    - 我想做一个[内锥面](process_type)，进刀次数[9](Cn)
+    - 做[外圆](process_type)，进刀次数是[8](Cn)
+    - 我需要一个[切槽](process_type)，进刀深度[5](Tr)
 - intent: request_sub_processing
   examples: |
     - 我想加工[外圆弧](sub_process_type)子工艺
-    - 我需要[外圆弧](sub_process_type)子工艺的G代码
+    - 我需要[外呀弧](sub_process_type)子工艺的G代码
     - [外圆弧](sub_process_type)子工艺的G代码是什么？
+    - 车一个[外延](sub_process_type)

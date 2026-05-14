@@ -336,7 +336,7 @@ class Chamfer4Process(P):
                     num += 1
                 elif a < (self.Cn - 1):
                     gcode.append(f"G01 U[{self.Tr * 2} * #521] F{self.F};")
-                    gcode.append(f"G01 U[{cr} * #521 * #511 * -1] W[{self.L} * #520] F{self.F};")
+                    gcode.append(f"G01 U[{cr} * #521 * #511 * -1] W[{self.L} * #520] F{self.F};") 
                     gcode.append(f"G00 U[{self.Tr} * #521 * -1] F{self.F};")
                     gcode.append(f"G01 U[{cr} * #521 * #511] W[{self.L} * #520 * -1] F{self.F * 10};")
                     num += 1
